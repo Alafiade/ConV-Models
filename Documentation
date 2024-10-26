@@ -1,0 +1,92 @@
+AN ANALYSIS OF CNN MODELS
+
+INTRODUCTION
+The objective  of this project is to analyze and compare different CNN models on a custom dataset, using overfitting as a criterion for model performance
+The importance of this project  is to understand how overfitting is essential in CNNs, where large models learn patterns that dont generalize on unseen data. By identifying a model that performs well without overfitting, i aim to make informed choices for image-based tasks.
+
+DATASET
+Dataset Overview
+Description : This dataset comprises of  medical images of breast cancer using ultrasound scan.The  Dataset is categorized into three classes: normal, benign, and malignant images.
+Source: https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset
+Preprocessing
+To ensure the data was suitable for both models, prepocessing techniques were applied to the model
+Resizing: All the images were Resized to 224x224
+Data Augmentation: Techniques  such as Flip, Grayscale, Gaussian Blur and ColorJitter were added to the images
+
+
+Models Selected for Comparison
+Vision Transformer
+Description : The Vision Transformer also called ViTs is a  CNN model adopted from the Transformer architectures used for NLP tasks.
+How this works is that images are broken into patches and self attention mechanisms are applied on it to learn spatial dependencies.
+Key Features:
+Utilizes self-attention instead of convolutions, which captures gloal dependencies better.
+Performs better on Large Image dataset but might vary on small datasets.
+
+DenseNet
+Description: This is a CNN architecture designed to improve the flow of information through dense connections between Layers.
+It fuctions by each layer receiving inputs from other preceding layer which helps o retain features from early layers.
+
+Key Features:
+It is effective at preserving feature information, often reducing overfitting on smaller datasets.
+
+Pretrained Versions.
+A pretrained version of densenet (densenet121) was used while the ViTs was pretrained vit_b_16  
+
+Experimental Setup
+Training Cofiguration
+Hperparameters:
+Learning Rate : The  models were trained on different Learning rates but 0.001 performed best on the models 
+Weight_ decay; The  weight decay have been adjusted based on the overfitting i observed; The model was first trained with an inital value of 0.1 but later adjusted to 0.1
+Batch_Size: The model was initially trained with a batch_size of 32 but a batch_size of 64 was later used.
+Optimizer : An SGD(Stochastian Gradient Descent)optimizer was used
+Training Duration: Each model was trained for over 20 epochs to allow a fair comparison while observing the trends in overfitting.
+Overfitting Criterion: The Overfitting was identifieed by observing a rise in the validation loss alongside a decrease in training loss.
+
+Results
+Vision Transformer Results
+Training Log Summary: Early epochs showed substantial improvement in both training and validation accuracy, but validation loss stabilized around epoch 9. After this point, validation accuracy showed a slight decline, suggesting potential overfitting.
+Validation Performance: Final validation loss: 0.4697, Final validation accuracy: 78.93%.
+Overfitting Analysis**: Validation accuracy peaked, while training accuracy continued to improve, indicating overfitting tendencies around epoch 9.
+
+DenseNet Results
+Training Log Summary: DenseNet maintained a steady improvement in validation accuracy with minimal increases in validation loss. Overfitting was less pronounced, with validation accuracy peaking in the later epochs.
+Validation Performance: Final validation loss: 0.4758, Final validation accuracy: 80.50%.
+Overfitting Analysis: DenseNet showed less sensitivity to overfitting compared to the Vision Transformer, suggesting a better generalization capacity on this dataset.
+
+Model Comparison
+Metric         Vision Transformer          DenseNet
+Final Training     0.4701                    0.3790
+Loss
+
+Final Validation    0.4697                  0.4758
+Loss
+
+Final Training     79.76%                   85.00%           
+Accuracy
+
+Final Validation   78.93%                   80.50%
+Accuracy
+
+
+Performance Summary**: DenseNet achieved slightly higher validation accuracy (80.50%) than the Vision Transformer (78.93%) and was less prone to overfitting, as evidenced by a more consistent validation loss.
+Insights: The  DenseNet’s dense connections likely contributed to better information retention,which aided  generalization and reduced overfitting while the  Vision Transformer’s self-attention performed well initially but faced challenges with overfitting in the later epochs.
+
+CONCLUSION
+DenseNet outperformed the Vision Transformer on this dataset by achievng a higher validation accuracy and better model generaliztion.
+The DenseNet architecture which reuses features provided an advantage over the vits on this small dataset where overfitting was a primary concern.
+Future Works : Additional experiments could be made by testing the models o larger dataset to analyze their performance and more hyperparameter tuning especially for the Vision Transformer to reduce overfitting.
+
+  
+
+  
+
+  
+
+  
+  
+  
+  
+  
+
+  
+  
